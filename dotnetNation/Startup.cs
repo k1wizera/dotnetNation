@@ -19,7 +19,6 @@
                 app.UseDeveloperExceptionPage();
 
             app.UseMvcWithDefaultRoute();
-            //app.MapGet("/", () => "Hello World!");
         }
     }
 }

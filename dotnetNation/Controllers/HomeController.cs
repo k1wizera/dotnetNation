@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using dotnetNation.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace dotnetNation.Controllers
 {
@@ -9,10 +10,22 @@ namespace dotnetNation.Controllers
             return View();
         }
 
+
         public IActionResult Post()
         {
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Edit()
+        {
+            return View(new Post());
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Post post)
+        {
+            return RedirectToAction("Index");
+        }
     }
 }

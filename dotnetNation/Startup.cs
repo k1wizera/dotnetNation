@@ -1,4 +1,7 @@
-﻿namespace dotnetNation
+﻿using dotnetNation.Data;
+using Microsoft.EntityFrameworkCore;
+
+namespace dotnetNation
 {
     public class Startup
     {
@@ -10,6 +13,7 @@
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 

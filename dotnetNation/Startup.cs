@@ -1,4 +1,5 @@
 ﻿using dotnetNation.Data;
+using dotnetNation.Data.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace dotnetNation
@@ -14,6 +15,9 @@ namespace dotnetNation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<IRepository, Repository>();
+
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 

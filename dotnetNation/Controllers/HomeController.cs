@@ -1,4 +1,5 @@
 ﻿using dotnetNation.Data;
+using dotnetNation.Data.Repository;
 using dotnetNation.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,11 +7,11 @@ namespace dotnetNation.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly AppDbContext _ctx;
+        private readonly IRepository _repo;
 
-        public HomeController(AppDbContext ctx) 
+        public HomeController(IRepository repo) 
         { 
-            _ctx = ctx;
+            _repo = repo;
         }
         public IActionResult Index()
         {
@@ -32,10 +33,12 @@ namespace dotnetNation.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Post post)
         {
-            _ctx.Posts.Add(post);
-            await _ctx.SaveChangesAsync();
+            _repo.AddPost(post);
 
-            return RedirectToAction("Index");
+            if (await _repo.SaveChangesAsync())
+                return RedirectToAction("Index");
+            else
+                return View(post);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace dotnetNation.Controllers
         {
             await _signInManager.PasswordSignInAsync(vm.UserName, vm.Password, false, false);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Panel");
         } 
         
         [HttpGet]
